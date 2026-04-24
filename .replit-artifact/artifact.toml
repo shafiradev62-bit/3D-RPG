@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Snow RPG"
+version = "1.0.0"
+id = "artifacts/snow-rpg"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21272
+
+[services.development]
+run = "pnpm --filter @workspace/snow-rpg run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/snow-rpg", "run", "build" ]
+publicDir = "artifacts/snow-rpg/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21272"
+BASE_PATH = "/"
